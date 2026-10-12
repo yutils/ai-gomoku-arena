@@ -1,0 +1,11 @@
+{
+  "name": "ai-vs-ai-gomoku",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "AI 大战 AI 五子棋对战平台",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "node --test \"tests/**/*.test.mjs\""
+  }
+}

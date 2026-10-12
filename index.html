@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI × AI 五子棋 · 大模型对战平台</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2307090f'/><circle cx='11' cy='11' r='5.2' fill='%231b2330' stroke='%2322d3ee' stroke-width='1.2'/><circle cx='21' cy='21' r='5.2' fill='%23f2f6fb'/></svg>">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand" id="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="bm-stone bm-black"></span><span class="bm-x">×</span><span class="bm-stone bm-white"></span>
+        </span>
+        <span class="brand-name" data-i18n-html="app.brandNameHtml">AI<span class="brand-dim">v</span>AI 五子棋</span>
+        <span class="brand-sub" data-i18n="app.brandSub">大模型对战平台</span>
+      </div>
+      <nav class="nav" id="nav">
+        <a class="nav-item" href="#/arena" data-view="arena" data-i18n="nav.arena">对战台</a>
+        <a class="nav-item" href="#/models" data-view="models" data-i18n="nav.models">模型配置</a>
+        <a class="nav-item" href="#/history" data-view="history" data-i18n="nav.history">历史记录</a>
+        <a class="nav-item" href="#/monitor" data-view="monitor" data-i18n="nav.monitor">系统监控</a>
+      </nav>
+      <div class="topbar-right" id="topbar-right">
+        <a class="gh-link" href="https://github.com/yutils/ai-gomoku-arena" target="_blank" rel="noopener" data-i18n-title="app.github">GitHub</a>
+        <button class="btn ghost sm lang-btn" id="lang-toggle" title="切换语言 / Switch language" data-i18n-title="app.langToggleTitle">EN</button>
+        <span class="pill" id="proxy-pill" data-i18n="app.checking">检测中…</span>
+      </div>
+    </header>
+    <main class="views" id="views">
+      <section class="view" id="view-arena" data-view="arena"></section>
+      <section class="view" id="view-models" data-view="models"></section>
+      <section class="view" id="view-history" data-view="history"></section>
+      <section class="view" id="view-monitor" data-view="monitor"></section>
+    </main>
+  </div>
+  <div class="toast-stack" id="toasts"></div>
+  <div class="modal-root" id="modal-root"></div>
+  <script type="module" src="js/ui/app.js"></script>
+</body>
+</html>
