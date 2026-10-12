@@ -67,6 +67,9 @@ Key points:
   - `{"reasoning_effort": "low"}` — lower the reasoning effort (services that support this parameter)
 - Start **llama.cpp** with `--metrics` so the monitor page can show full metrics such as token counts, KV cache, request queue and MTP draft acceptance rate (it works without it — just with fewer metrics)
 
+#### screenshot
+![Img](doc/image1.jpg)
+
 ## Match mechanics
 
 - 15×15, no forbidden moves (size selectable: 13/15/19); Black moves first; win with five or more in a row horizontally, vertically or diagonally; a full board is a draw
