@@ -68,7 +68,7 @@ Key points:
 - Start **llama.cpp** with `--metrics` so the monitor page can show full metrics such as token counts, KV cache, request queue and MTP draft acceptance rate (it works without it — just with fewer metrics)
 
 #### screenshot
-![Img](doc/image1.jpg)
+![Img](doc/image3.jpg)
 
 ## Match mechanics
 
