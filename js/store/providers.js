@@ -11,32 +11,9 @@ export const PROTOCOLS = [
   { id: 'anthropic-messages', name: 'Anthropic Messages（规划中）', available: false },
 ];
 
-// 预置一个本机服务，方便开箱即用
+// 默认不预置任何服务，由用户自行添加
 export function defaultProviders() {
-  return [
-    {
-      id: 'local-llama',
-      name: '本地 llama.cpp',
-      protocol: 'openai-completions',
-      baseUrl: 'http://127.0.0.1:8080/v1',
-      apiKey: '',
-      viaProxy: 'auto',
-      headers: [],
-      timeoutMs: 300000,
-      models: [
-        {
-          id: 'qwen3.8-flash-next-iq3_s',
-          name: 'Qwen3.8 Flash Next',
-          ctx: 262144,
-          maxTokens: 32768,
-          temperature: 1.0,
-          topP: 0.95,
-          topK: 20,
-          thinking: true,
-        },
-      ],
-    },
-  ];
+  return [];
 }
 
 export function loadProviders() {

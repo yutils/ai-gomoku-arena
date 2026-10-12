@@ -4,6 +4,8 @@
 
 Let multiple AIs (or humans, or built-in algorithms) play Gomoku against each other, while recording every performance detail: thinking time, time-to-first-token, token usage and speed, MTP draft acceptance rate, CPU/GPU load, and more.
 
+> **Live demo**: <https://yutils.github.io/ai-gomoku-arena>
+
 - **Pick each side independently**: any AI model / built-in algorithm (three difficulty levels) / human
 - **Watch thinking live**: stream the model's reasoning, and expand the raw thought for each move
 - **Real metrics**: per-move and cumulative time, TTFT, input/output tokens, tok/s, cache hits, MTP drafts
@@ -42,12 +44,11 @@ To restrict access to the local machine: `HOST=127.0.0.1 node server/server.js`;
 :: http://127.0.0.1:8899
 ```
 
-Two providers are pre-configured on first open (you can delete or edit them):
+**Nothing is pre-configured on first open — you add it yourself** (config is stored only in your own browser):
 
-- **Local llama.cpp** — `http://127.0.0.1:8080/v1`, model `bonsai2-27b`
-- **Strata** — `http://10.1.1.8:8080/v1`, model `qwen3.8-flash-next-iq3_s` (set to "always via local proxy")
-
-Then go to the "Arena": choose the Black and White players (AI model / classic algorithm / human) and click "Start match".
+1. Open "Models" → "New provider", fill in the Base URL (point it at `/v1`) and API Key; "Fetch available models" probes `/v1/models`
+2. Add or pick the models you want in the model list (model ID, context window, max output, etc.)
+3. Save, then go to the "Arena": choose the Black and White players (AI model / classic algorithm / human) and click "Start match"
 
 ## Connecting to any model service
 
@@ -72,10 +73,11 @@ Key points:
 - Participants: **AI model** / **built-in algorithm** (Beginner = random preference, Medium = heuristic attack/defense, Hard = Minimax α-β) / **human**
 - Control bar: Start / Pause / Resume / Undo / Stop / Rematch; at any point during a match you can "take over as human" for either side, and later "restore AI"
 - Rules and fault tolerance (configurable in "Match settings"):
-  - Per-move timeout (default 300s): the budget is split evenly across the remaining retries, so one slow request doesn't consume all the chances
-  - Illegal-move retries (default 3): feed the occupied/out-of-bounds info back to the model so it can give new coordinates
+  - Per-move timeout (default 600s): the overall cap for one whole move; an individual request only times out when no data arrives for a long time, so a model that is still streaming won't be cut off
+  - Illegal-move retries (default 10): feed the occupied/out-of-bounds info back to the model so it can give new coordinates
   - On error: **built-in algorithm fallback move** (marked "fallback") or **immediate loss**
-  - Prompt language: Chinese / English; whether the model must analyze the position first (thinking mode)
+  - Prompt language: follows the UI language (toggle at the top right); whether the model must analyze the position first (thinking mode)
+  - During a match you can click "Stop thinking" to cut off the current reasoning immediately and salvage a move from the output produced so far
   - When model output is truncated by length, the parser automatically falls back to the last coordinates found in its reasoning
 
 ## Metric definitions
@@ -109,6 +111,7 @@ AIvsAI/
 ├── server/server.js           # Zero-dependency helper service (static hosting / CORS proxy / system info)
 ├── tests/                     # node:test unit tests (board/parsing/algorithms)
 ├── 启动服务.bat               # One-click start and open browser
+├── LICENSE                    # MIT License
 └── package.json               # Only for npm test and npm start, no dependencies
 ```
 
@@ -135,3 +138,7 @@ npm test        :: node --test, 24 cases (board/win/coordinate parsing/move pars
 
 - This is a **local tool**: the API Key lives only in your own browser's localStorage, and the server stores no keys
 - If it listens on `0.0.0.0` (the default), other devices on the LAN can also use `/proxy` (which can forward arbitrary http/https requests) and system info — **use it only on a home/trusted intranet**; when not needed, restrict to the local machine with `HOST=127.0.0.1 node server/server.js`
+
+## License
+
+Released under the [MIT License](LICENSE).
